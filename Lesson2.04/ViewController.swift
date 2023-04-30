@@ -43,12 +43,12 @@ class ViewController: UIViewController {
     
     @IBAction func doneButtonPressed() {
         guard let inputText = textField.text, !inputText.isEmpty else {
-            print("textField is empty")
+            showAlert(withTitle: "Text field is empty", andMessage: "Please, enter your name")
             return
         }
         
         if let _ = Double(inputText) {
-            print("wrong format")
+            showAlert(withTitle: "Wrong format", andMessage: "Please, enter your name")
         }
             
         mainLabel.text = textField.text
@@ -71,8 +71,16 @@ class ViewController: UIViewController {
         slider.thumbTintColor = .white
     }
     
-    private func showAlert(withTitle title: String, andMessage message: String) {
-        
-    }
 }
 
+// MARK: UIAlertController
+extension ViewController {
+    private func showAlert(withTitle title: String, andMessage message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            self.textField.text = ""
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+}

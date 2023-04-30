@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var mainLabel: UILabel!
     @IBOutlet var slider: UISlider!
+    @IBOutlet var textField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,19 @@ class ViewController: UIViewController {
         view.backgroundColor = view.backgroundColor?.withAlphaComponent(CGFloat(slider.value))
     }
     
+    @IBAction func doneButtonPressed() {
+        guard let inputText = textField.text, !inputText.isEmpty else {
+            print("textField is empty")
+            return
+        }
+        
+        if let _ = Double(inputText) {
+            print("wrong format")
+        }
+            
+        mainLabel.text = textField.text
+    }
+    
     // MARK: private methods
     private func setupMainLabel() {
         mainLabel.text = slider.value.formatted()
@@ -55,6 +69,10 @@ class ViewController: UIViewController {
         slider.minimumTrackTintColor = .red
         slider.maximumTrackTintColor = .black
         slider.thumbTintColor = .white
+    }
+    
+    private func showAlert(withTitle title: String, andMessage message: String) {
+        
     }
 }
 

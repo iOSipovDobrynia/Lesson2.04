@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet var mainLabel: UILabel!
     @IBOutlet var slider: UISlider!
     @IBOutlet var textField: UITextField!
+    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet var switchLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +54,15 @@ class ViewController: UIViewController {
         }
             
         mainLabel.text = textField.text
+    }
+    
+    @IBAction func datePickerAction() {
+        mainLabel.text = datePicker.date.formatted(date: .long, time: .omitted)
+    }
+    
+    @IBAction func switchAction(_ sender: UISwitch) {
+        datePicker.isHidden = !sender.isOn
+        switchLabel.text = datePicker.isHidden ? "Date picker is off" : "Date picker is on"
     }
     
     // MARK: private methods
